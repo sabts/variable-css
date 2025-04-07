@@ -18,7 +18,55 @@ nav ul{
     margin-top: 0;
     margin-bottom: 0;
 }
+:root{
+    --scroll-color:red;
+    --xl-text: 2rem;
+    --text-color: white;
+    --mouse-box-color: #ffa500;
+    --background-color: black;
+    --scroll-box-width: 0%;
+}
 body{
     margin: 0;
     font-family: sans-serif;
+    display: flex;
+    justify-items: center;
+    min-height: 500vh;
+    background-color: var(--background-color);
+ }
+
+.info-container{
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+}
+.scrollbox{
+    height: 20px;
+    width: var(--scroll-box-width);
+    background-color: var(--scroll-color);
+    position: fixed;
+}
+.title{
+    font-size: var(--xl-text);
+    color: var(--text-color);
+    padding-top: 1rem;
+}
+.buttons-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.button{
+    height: 30px;
+    border-radius: 4px;
+    border: none;
+    margin: auto;
+}
+
+.mouse-box{
+    position: absolute;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    transform: translate(0%, 0%);
+    background-color: var(--mouse-box-color);
 }
