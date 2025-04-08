@@ -2,19 +2,26 @@ const rgbbutton = document.getElementById("button-rgb");
 const hexabutton = document.getElementById("button-hexa");
 const elementTitle = document.getElementById("title");
 
-const mousebox = document.querySelector(".mouse-box");
 const rootStyles = document.documentElement.style;
+
+const rgbcolors = () => {
+  const colorvalue = Math.floor(Math.random() * 256);  // del 0 al 255
+  return colorvalue;
+};
 
 let x = 0;
 let y = 0;
 
 const boxFollow = box => {
-  //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX
-  rootStyles.setProperty("-box-position", "relative"); //fixed
+  x = box.clientX;
+  y = box.clientY;
+  
+  rootStyles.setProperty("--box-positionX", `${x}px`);
+  rootStyles.setProperty("--box-positionY", `${y}px`);
 };
 
 const scrollPosition = () => {
-  position = scrollY;
+  const position = scrollY;
   elementTitle.textContent = `Te has desplazado ${position} px`;
 };
 
@@ -25,21 +32,13 @@ const scrollWidthIncrease = () => {
   rootStyles.setProperty("--scroll-box-width", `${boxWidth}%`);
 };
 
-const rgbcolors = () => {
-  // del 0 al 255
-  const colorvalue = Math.floor(Math.random() * 256);
-  return colorvalue;
-};
-
 const changeRgbbutton = () => {
-  //3 valores: rojo,verde,azul
   rootStyles.setProperty(
     "--background-color",
-    `rgb(${rgbcolors()}, ${rgbcolors()}, ${rgbcolors()})`
-  );
+    `rgb(${rgbcolors()}, ${rgbcolors()}, ${rgbcolors()})`);
 };
+
 const changeHexabutton = () => {
-  //hexa 16 números (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E y F)     empieza por #    6 digitos
   let hexacolor = "";
   const hexa = "0123456789ABCDEF";
   for (let i = 0; i < 6; i++) {

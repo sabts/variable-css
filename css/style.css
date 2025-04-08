@@ -25,7 +25,9 @@ nav ul{
     --mouse-box-color: #ffa500;
     --background-color: black;
     --scroll-box-width: 0%;
-    --box-position: 0%;
+    --box-position: fixed;
+    --box-positionX: 0px;
+    --box-positionY: 0px;
 }
 body{
     margin: 0;
@@ -65,9 +67,10 @@ body{
 
 .mouse-box{
     position: var(--box-position);
-    cursor: pointer;
+    left: var(--box-positionX);
+    top: var(--box-positionY);
     height: 20px;
     width: 20px;
-    transform: var(--transform-box);
     background-color: var(--mouse-box-color);
+    pointer-events: none;
 }
