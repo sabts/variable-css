@@ -1,48 +1,61 @@
-const rgbbutton = document.getElementById("button-rgb")
-const hexabutton = document.getElementById("button-hexa")
+const rgbbutton = document.getElementById("button-rgb");
+const hexabutton = document.getElementById("button-hexa");
+const elementTitle = document.getElementById("title");
 
-const mousebox = document.querySelector(".mouse-box")
-const rootStyles = document.documentElement.style
+const mousebox = document.querySelector(".mouse-box");
+const rootStyles = document.documentElement.style;
 
-rootStyles.setProperty('--scroll-box-width','0%')
+let x = 0;
+let y = 0;
 
-const boxFollow = (box) => {
-    mousebox.transform = `translate(${box.clientX}px, ${box.client}px)`
-}
+const boxFollow = box => {
+  //https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/clientX
+  rootStyles.setProperty("-box-position", "relative"); //fixed
+};
+
+const scrollPosition = () => {
+  position = scrollY;
+  elementTitle.textContent = `Te has desplazado ${position} px`;
+};
 
 const scrollWidthIncrease = () => {
-   //let totalScroll =  document.body.scrollHeight
+  const boxWidth =
+    (scrollY * 100) / (document.body.scrollHeight - window.innerHeight);
 
-   if(window.scrollY >= document.body.scrollHeight){
-    rootStyles.setProperty('--scroll-box-width','100%')
-    }
-    if(window.scrollY === 0) {
-        rootStyles.setProperty('--scroll-box-width','0%')
-    }
-}
+  rootStyles.setProperty("--scroll-box-width", `${boxWidth}%`);
+};
 
-const rgbcolors = () =>{
-    // del 0 al 255
-    const colorvalue = Math.floor(Math.random() * 255 - 0)
-    return colorvalue
-}
+const rgbcolors = () => {
+  // del 0 al 255
+  const colorvalue = Math.floor(Math.random() * 256);
+  return colorvalue;
+};
 
-const changeRgbbutton = () =>{
-    //3 valores: rojo,verde,azul
-    rootStyles.setProperty('--background-color',`rgb (${rgbcolors}, ${rgbcolors}, ${rgbcolors})`)
-}
-const changeHexabutton = () =>{
-    //hexa 16 números (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E y F)
-// empieza por #
-    const hexa = '0123456789ABCDEF';
-    hexa.length = 16;
-    hexacolorRandom = hexa.charAt(
-        Math.floor(Math.random() * hexa.length))
-    rootStyles.setProperty( '--background-color',`#${hexacolorRandom}`)
-}
+const changeRgbbutton = () => {
+  //3 valores: rojo,verde,azul
+  rootStyles.setProperty(
+    "--background-color",
+    `rgb(${rgbcolors()}, ${rgbcolors()}, ${rgbcolors()})`
+  );
+};
+const changeHexabutton = () => {
+  //hexa 16 números (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E y F)     empieza por #    6 digitos
+  let hexacolor = "";
+  const hexa = "0123456789ABCDEF";
+  for (let i = 0; i < 6; i++) {
+    const hexacolorRandom = hexa.charAt(
+      Math.floor(Math.random() * hexa.length)
+    );
+    hexacolor += hexacolorRandom;
+  }
+  rootStyles.setProperty("--background-color", `#${hexacolor}`);
+};
 
-document.addEventListener("mousemove", boxFollow)
-rgbbutton.addEventListener("click",changeRgbbutton)
+document.addEventListener("mousemove", boxFollow);
 
-hexabutton.addEventListener("click",changeHexabutton)
-window.addEventListener("scroll",scrollWidthIncrease)
+window.addEventListener("scroll", scrollWidthIncrease);
+rgbbutton.addEventListener("click", changeRgbbutton);
+hexabutton.addEventListener("click", changeHexabutton);
+
+window.addEventListener("scroll", scrollPosition);
+window.addEventListener("scroll", scrollWidthIncrease);

@@ -25,6 +25,7 @@ nav ul{
     --mouse-box-color: #ffa500;
     --background-color: black;
     --scroll-box-width: 0%;
+    --box-position: 0%;
 }
 body{
     margin: 0;
@@ -49,7 +50,7 @@ body{
 .title{
     font-size: var(--xl-text);
     color: var(--text-color);
-    padding-top: 1rem;
+    padding: 1rem;
 }
 .buttons-container{
     display: flex;
@@ -63,10 +64,10 @@ body{
 }
 
 .mouse-box{
-    position: absolute;
+    position: var(--box-position);
     cursor: pointer;
     height: 20px;
     width: 20px;
-    transform: translate(0%, 0%);
+    transform: var(--transform-box);
     background-color: var(--mouse-box-color);
 }
